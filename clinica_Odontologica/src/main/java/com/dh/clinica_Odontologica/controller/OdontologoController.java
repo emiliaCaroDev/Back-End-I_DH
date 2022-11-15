@@ -1,32 +1,36 @@
 package com.dh.clinica_Odontologica.controller;
 
 import com.dh.clinica_Odontologica.domain.Odontologo;
+import com.dh.clinica_Odontologica.service.IOdontologoService;
 import com.dh.clinica_Odontologica.service.impl.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+//@RequestMapping("/odontologo")
 public class OdontologoController {
 
-private OdontologoService odontologoService;
+private IOdontologoService odontologoService;
 
     @Autowired
-    public OdontologoController(OdontologoService odontologoService) {
+    public OdontologoController(IOdontologoService odontologoService) {
         this.odontologoService = odontologoService;
     }
 
-    @GetMapping("/index")
-    public String getOdontologoXId(Model model, @RequestParam("id") Integer id){
+    @GetMapping("odontologo/{id}")
+    public String getOdontologoXId(Model model, @PathVariable("id") Integer id){
 
         Odontologo odontologo=odontologoService.buscarOdontologoXId(id);
-        model.addAttribute("nombre",odontologo.getNombre());
-        model.addAttribute("apellido",odontologo.getApellido());
-        model.addAttribute("matricula",odontologo.getNumeroMatricula());
+        model.addAttribute("nombreOdontologo",odontologo.getNombre());
+        model.addAttribute("apellidoOdontologo",odontologo.getApellido());
+        model.addAttribute("matriculaOdontologo",odontologo.getNumeroMatricula());
 
-        return "index";
+        return "odontologo";
     }
 
 

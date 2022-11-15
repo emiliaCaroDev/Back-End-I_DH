@@ -2,11 +2,13 @@ package com.dh.clinica_Odontologica.dao.impl;
 
 import com.dh.clinica_Odontologica.dao.IDAO;
 import com.dh.clinica_Odontologica.domain.Odontologo;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class OdontologoDAOH2 implements IDAO<Odontologo> {
 
     private static Connection conn = null;

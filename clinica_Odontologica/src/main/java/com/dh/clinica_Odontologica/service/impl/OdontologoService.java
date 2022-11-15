@@ -16,9 +16,7 @@ public class OdontologoService implements IOdontologoService {
         this.odontologoDao = odontologoDao;
     }
 
-    public OdontologoService(){
-        odontologoDao= new OdontologoDAOH2();
-    }
+   /*public OdontologoService(){}*/
 
     @Override
     public List<Odontologo> listarTodosOdontologos() {
