@@ -115,6 +115,11 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
         return null;
     }
 
+    @Override
+    public Odontologo actualizar(Odontologo odontologo) {
+        return null;
+    }
+
     private static Connection obtenerConnection() throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
         return DriverManager.getConnection("jdbc:h2:~/test","sa","");

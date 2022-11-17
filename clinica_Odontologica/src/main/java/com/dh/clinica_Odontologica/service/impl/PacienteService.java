@@ -41,6 +41,11 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public Paciente buscarXId(Integer id) {
-        return null;
+        return pacienteDao.buscar(id);
+    }
+
+    @Override
+    public Paciente actualizarPaciente(Paciente paciente) {
+        return pacienteDao.actualizar(paciente);
     }
 }

@@ -5,14 +5,14 @@ import com.dh.clinica_Odontologica.service.impl.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/pacientes")
 public class PacienteController {
 
     private PacienteService pacienteService;
+    private Paciente paciente;
 
     //constructor
     @Autowired
@@ -20,11 +20,53 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping("/paciente/{email}")
+    /*
+    //Con vista index
+    @GetMapping("/{email}")
     public String getPacienteXEmail(Model model, @PathVariable("email") String email){
-        Paciente paciente=pacienteService.buscarXEmail(email);
+        paciente=pacienteService.buscarXEmail(email);
         model.addAttribute("nombre",paciente.getNombre());
         model.addAttribute("apellido",paciente.getApellido());
         return "index";
     }
+    */
+
+
+    /*@GetMapping("/{id}")
+    public String getPacienteXId(Model model,@PathVariable("id") Integer id){
+        paciente=pacienteService.buscarXId(id);
+        model.addAttribute("nombre",paciente.getNombre());
+        model.addAttribute("apellido",paciente.getApellido());
+        return "index";
+    }*/
+
+    @GetMapping("searchById/{id}")
+    public Paciente getPacienteXId(@PathVariable ("id") Integer id){
+        return pacienteService.buscarXId(id);
+    }
+
+    @GetMapping("searchByEmail/{email}")
+    public Paciente getPacienteXEmail(@PathVariable("email") String email){
+        return pacienteService.buscarXEmail(email);
+    }
+
+    @PostMapping("/new")
+    public Paciente addPaciente(@RequestBody Paciente paciente){
+        return pacienteService.guardarPaciente(paciente);
+    }
+
+    @PutMapping("update")
+    public Paciente updatePaciente(@RequestBody Paciente paciente){
+
+        /*Paciente pacienteActualizado= null;
+        if(paciente.getId()!=null && pacienteService.buscarXId(paciente.getId())!=null){
+            pacienteActualizado= pacienteService.actualizarPaciente(paciente);
+        }
+        return pacienteActualizado;
+        */
+        return pacienteService.actualizarPaciente(paciente);
+    }
+
+
+
 }

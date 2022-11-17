@@ -25,7 +25,7 @@ public class ClinicaOdontologicaApplication {
 		Domicilio domicilio = new Domicilio("Av Santa fe", 444, "CABA", "Buenos Aires");
 		Paciente paciente = new Paciente(888888, "Paz","Santiago", LocalDate.of(2022,11,3),"santi@gmail.com", domicilio);
 		Domicilio domicilio1 = new Domicilio("Av Avellaneda", 333, "CABA", "Buenos Aires");
-		Paciente paciente1 = new Paciente(999999,"Micaela", "Perez", LocalDate.of(2021,12,5), "mika@gmail.com",domicilio1);
+		Paciente paciente1 = new Paciente(999999,"Perez", "Micaela", LocalDate.of(2021,12,5), "mika@gmail.com",domicilio1);
 		pacienteService.guardarPaciente(paciente1);
 		pacienteService.guardarPaciente(paciente);
 		odontologoService.guardarOdontologo(new Odontologo("348971960","Juan", "Ramirez"));

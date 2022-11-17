@@ -64,7 +64,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
     @Override
     public Paciente buscar(Integer id) {
         Paciente paciente= null;
-        DomicilioDAOH2 domicilioDAOH2= new DomicilioDAOH2();
+        domicilioDAOH2= new DomicilioDAOH2();
         try {
             conn=getConnection();
             ps=conn.prepareStatement("SELECT * FROM PACIENTES WHERE ID=?");
@@ -93,7 +93,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
     @Override
     public List<Paciente> listarTodos() {
         List<Paciente> listaPacientes= new ArrayList<>();
-        DomicilioDAOH2 domicilioDAOH2= new DomicilioDAOH2();
+        domicilioDAOH2= new DomicilioDAOH2();
         try {
             conn=getConnection();
             ps=conn.prepareStatement("SELECT * FROM PACIENTES");
@@ -114,6 +114,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
 
     @Override
     public void eliminar(Integer id) {
+        domicilioDAOH2= new DomicilioDAOH2();
         try {
             conn=getConnection();
             ps= conn.prepareStatement("DELETE FROM PACIENTES WHERE ID=?");
@@ -139,7 +140,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
     @Override
     public Paciente buscarXEmail(String email) {
         Paciente paciente= null;
-        DomicilioDAOH2 domicilioDAOH2= new DomicilioDAOH2();
+        domicilioDAOH2= new DomicilioDAOH2();
         try {
             conn=getConnection();
             ps=conn.prepareStatement("SELECT * FROM PACIENTES WHERE EMAIL=?");
@@ -159,6 +160,38 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return paciente;
+    }
+
+    @Override
+    public Paciente actualizar(Paciente paciente) {
+        domicilioDAOH2= new DomicilioDAOH2();
+        try {
+            conn=getConnection();
+            ps=conn.prepareStatement("UPDATE PACIENTES SET DNI=?,APELLIDO=?,NOMBRE=?,FECHA_INGRESO=?,EMAIL=?,ID_DOMICILIO=? WHERE ID=?");
+            ps.setInt(1,paciente.getDNI());
+            ps.setString(2, paciente.getApellido());
+            ps.setString(3,paciente.getNombre());
+            ps.setDate(4,Date.valueOf(paciente.getFechaIngreso()));
+            ps.setString(5, paciente.getEmail());
+            ps.setInt(6,paciente.getDomicilio().getId());
+            ps.setInt(7,paciente.getId());
+            ps.execute();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
             }
         }

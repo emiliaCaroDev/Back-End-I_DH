@@ -33,9 +33,10 @@ class PacienteServiceTest {
         paciente = new Paciente(888888, "Paz","Santiago", LocalDate.of(2022,11,3),"santi@gmail.com", domicilio);
         domicilio1 = new Domicilio("Av Avellaneda", 333, "CABA", "Buenos Aires");
         paciente1 = new Paciente(999999,"Micaela", "Perez", LocalDate.of(2021,12,5), "mika@gmail.com",domicilio1);
+
     }
 
-    @Order(4)
+    @Order(5)
     @Test
     void listarTodosPacientes() {
         assertTrue(pacienteService.listarTodosPacientes().size()>0);
@@ -67,5 +68,11 @@ class PacienteServiceTest {
     void eliminarPaciente(){
         pacienteService.eliminarPaciente(2);
         assertNull(pacienteService.buscarXId(2));
+    }
+
+    @Order(4)
+    @Test
+    void actualizarPaciente(){
+        pacienteService.actualizarPaciente(paciente);
     }
 }

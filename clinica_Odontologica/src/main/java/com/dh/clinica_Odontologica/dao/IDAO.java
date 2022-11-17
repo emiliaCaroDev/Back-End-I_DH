@@ -12,4 +12,6 @@ public interface IDAO<T>{
     void eliminar(Integer id);
 
     T buscarXEmail(String email);
+
+    T actualizar(T t);
 }

@@ -126,6 +126,34 @@ public class DomicilioDAOH2 implements IDAO<Domicilio> {
         return null;
     }
 
+    @Override
+    public Domicilio actualizar(Domicilio domicilio) {
+        try{
+            conn=getConnection();
+            ps=conn.prepareStatement("UPDATE DOMICILIOS SET CALLE=?,NUMERO=?,LOCALIDAD=?,PROVINCIA=? WHERE ID=?");
+            ps.setString(1,domicilio.getCalle());
+            ps.setInt(2,domicilio.getNumero());
+            ps.setString(3,domicilio.getLocalidad());
+            ps.setString(4, domicilio.getProvincia());
+            ps.setInt(5,domicilio.getId());
+            ps.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return domicilio;
+    }
+
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
         return DriverManager.getConnection("jdbc:h2:~/test","sa","");

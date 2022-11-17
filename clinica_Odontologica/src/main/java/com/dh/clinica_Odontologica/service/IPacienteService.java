@@ -14,4 +14,6 @@ public interface IPacienteService{
     void eliminarPaciente(Integer id);
 
     Paciente buscarXId(Integer id);
+
+    Paciente actualizarPaciente(Paciente paciente);
 }
