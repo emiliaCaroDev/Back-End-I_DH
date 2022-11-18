@@ -7,17 +7,18 @@ public class Odontologo {
     private String nombre;
     private String apellido;
 
-    public Odontologo(Integer id, String numeroMatricula, String nombre, String apellido) {
+    public Odontologo(Integer id, String numeroMatricula, String apellido, String nombre) {
         this.id = id;
         this.numeroMatricula = numeroMatricula;
-        this.nombre = nombre;
         this.apellido = apellido;
+        this.nombre = nombre;
+
     }
 
-    public Odontologo(String numeroMatricula, String nombre, String apellido) {
+    public Odontologo(String numeroMatricula, String apellido, String nombre) {
         this.numeroMatricula = numeroMatricula;
-        this.nombre = nombre;
         this.apellido = apellido;
+        this.nombre = nombre;
     }
 
     public Odontologo(){}
@@ -27,8 +28,8 @@ public class Odontologo {
         return "Odontologo{" +
                 "id=" + id +
                 ", numeroMatricula='" + numeroMatricula + '\'' +
-                ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 

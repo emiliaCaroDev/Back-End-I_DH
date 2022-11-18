@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-//@RequestMapping("/odontologo")
+@RequestMapping("/odontologos")
 public class OdontologoController {
 
 private IOdontologoService odontologoService;
@@ -19,7 +21,8 @@ private IOdontologoService odontologoService;
         this.odontologoService = odontologoService;
     }
 
-    @GetMapping("odontologo/{id}")
+    /*
+    @GetMapping("odontologos/{id}")
     public String getOdontologoXId(Model model, @PathVariable("id") Integer id){
 
         Odontologo odontologo=odontologoService.buscarOdontologoXId(id);
@@ -29,6 +32,34 @@ private IOdontologoService odontologoService;
 
         return "odontologo";
     }
+    */
+
+    @GetMapping("/{id}")
+    public Odontologo getOdontologoXId(@PathVariable("id") Integer id){
+        return odontologoService.buscarOdontologoXId(id);
+    }
+
+    @PostMapping()
+    public Odontologo addOdontologo(@RequestBody Odontologo odontologo){
+        return odontologoService.guardarOdontologo(odontologo);
+    }
+
+    @PutMapping()
+    public Odontologo updateOdontologo(@RequestBody Odontologo odontologo){
+        return odontologoService.actualizarOdontologo(odontologo);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOdontologo(@PathVariable("id") Integer id){
+        odontologoService.eliminarOdontologo(id);
+    }
+
+    @GetMapping()
+    public List<Odontologo> getAllOdontologos(){
+        return odontologoService.listarTodosOdontologos();
+    }
+
+
 
 
 }

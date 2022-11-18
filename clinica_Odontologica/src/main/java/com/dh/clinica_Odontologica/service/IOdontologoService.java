@@ -9,4 +9,8 @@ public interface IOdontologoService {
     List<Odontologo> listarTodosOdontologos();
     Odontologo buscarOdontologoXId(Integer id);
     Odontologo guardarOdontologo(Odontologo odontologo);
+
+    void eliminarOdontologo(Integer id);
+
+    Odontologo actualizarOdontologo(Odontologo odontologo);
 }

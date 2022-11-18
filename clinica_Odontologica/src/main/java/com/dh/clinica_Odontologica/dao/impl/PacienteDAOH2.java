@@ -83,7 +83,8 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
         finally {
             try {
                 conn.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -104,10 +105,20 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
                         rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscar(rs.getInt(7)));
                 listaPacientes.add(paciente);
             }
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return listaPacientes;
     }
@@ -119,6 +130,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
             conn=getConnection();
             ps= conn.prepareStatement("DELETE FROM PACIENTES WHERE ID=?");
             ps.setInt(1,id);
+            domicilioDAOH2.eliminar(id);
             ps.execute();
         }
         catch (ClassNotFoundException e) {
@@ -151,9 +163,11 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
                 paciente= new Paciente(rs.getInt(1),rs.getInt(2),rs.getString(3),
                         rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscar(rs.getInt(7)));
             }
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         finally {

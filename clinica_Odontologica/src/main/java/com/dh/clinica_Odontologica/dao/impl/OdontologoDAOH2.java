@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dh.clinica_Odontologica.dao.impl.PacienteDAOH2.getConnection;
+
 @Component
 public class OdontologoDAOH2 implements IDAO<Odontologo> {
 
@@ -20,7 +22,7 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
 
         try {
             conn = obtenerConnection();
-            ps = conn.prepareStatement("INSERT INTO ODONTOLOGOS(NUMERO_MATRICULA,NOMBRE,APELLIDO)VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement("INSERT INTO ODONTOLOGOS(NUMERO_MATRICULA,APELLIDO,NOMBRE)VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, odontologo.getNumeroMatricula());
             ps.setString(2, odontologo.getApellido());
             ps.setString(3, odontologo.getNombre());
@@ -36,22 +38,21 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        }
+        finally {
+            try {
+                conn.close();
             }
-
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return odontologo;
     }
 
     @Override
     public Odontologo buscar(Integer id) {
-        Odontologo odontologo= new Odontologo();
+        Odontologo odontologo= null;
         try {
             conn=obtenerConnection();
             ps=conn.prepareStatement("SELECT * FROM ODONTOLOGOS WHERE ID=?");
@@ -62,10 +63,20 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
                 odontologo= new Odontologo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
             }
 
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return odontologo;
     }
@@ -88,17 +99,19 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
                 listaOdontologos.add(odontologo);
             }
 
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return listaOdontologos;
@@ -107,7 +120,26 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
 
     @Override
     public void eliminar(Integer id) {
-
+        try {
+                conn=obtenerConnection();
+                ps=conn.prepareStatement("DELETE FROM ODONTOLOGOS WHERE ID=?");
+                ps.setInt(1,id);
+                ps.execute();
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            finally {
+                try {
+                    conn.close();
+                }
+                catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
     }
 
     @Override
@@ -117,7 +149,29 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
 
     @Override
     public Odontologo actualizar(Odontologo odontologo) {
-        return null;
+        try {
+            conn=obtenerConnection();
+            ps=conn.prepareStatement("UPDATE ODONTOLOGOS SET NUMERO_MATRICULA=?,APELLIDO=?,NOMBRE=? WHERE ID=?");
+            ps.setString(1,odontologo.getNumeroMatricula());
+            ps.setString(2, odontologo.getApellido());
+            ps.setString(3, odontologo.getNombre());
+            ps.setInt(4,odontologo.getId());
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return odontologo;
     }
 
     private static Connection obtenerConnection() throws ClassNotFoundException, SQLException {

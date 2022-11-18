@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -50,12 +52,12 @@ public class PacienteController {
         return pacienteService.buscarXEmail(email);
     }
 
-    @PostMapping("/new")
+    @PostMapping()
     public Paciente addPaciente(@RequestBody Paciente paciente){
         return pacienteService.guardarPaciente(paciente);
     }
 
-    @PutMapping("update")
+    @PutMapping()
     public Paciente updatePaciente(@RequestBody Paciente paciente){
 
         /*Paciente pacienteActualizado= null;
@@ -65,6 +67,16 @@ public class PacienteController {
         return pacienteActualizado;
         */
         return pacienteService.actualizarPaciente(paciente);
+    }
+
+    @GetMapping()
+    public List<Paciente> getAllPacientes(){
+        return pacienteService.listarTodosPacientes();
+    }
+
+    @DeleteMapping("/{id}")
+    public void detelePaciente(@PathVariable("id") Integer id){
+        pacienteService.eliminarPaciente(id);
     }
 
 

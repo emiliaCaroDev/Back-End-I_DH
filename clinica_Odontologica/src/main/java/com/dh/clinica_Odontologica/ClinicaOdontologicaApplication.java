@@ -28,7 +28,9 @@ public class ClinicaOdontologicaApplication {
 		Paciente paciente1 = new Paciente(999999,"Perez", "Micaela", LocalDate.of(2021,12,5), "mika@gmail.com",domicilio1);
 		pacienteService.guardarPaciente(paciente1);
 		pacienteService.guardarPaciente(paciente);
-		odontologoService.guardarOdontologo(new Odontologo("348971960","Juan", "Ramirez"));
+		odontologoService.guardarOdontologo(new Odontologo("348971960","Ramirez", "Juan"));
+		odontologoService.guardarOdontologo(new Odontologo("215478","Mendez","Pedro"));
+		odontologoService.guardarOdontologo(new Odontologo("14578","Puentes","Ignacio"));
 
 	}
 
