@@ -6,7 +6,6 @@ import com.dh.clinica_Odontologica.domain.Paciente;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -62,7 +61,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
     }
 
     @Override
-    public Paciente buscar(Integer id) {
+    public Paciente buscarXId(Integer id) {
         Paciente paciente= null;
         domicilioDAOH2= new DomicilioDAOH2();
         try {
@@ -73,7 +72,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
 
             while(rs.next()){
                 paciente= new Paciente(rs.getInt(1),rs.getInt(2),rs.getString(3),
-                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscar(rs.getInt(7)));
+                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscarXId(rs.getInt(7)));
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -102,7 +101,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
 
             while(rs.next()){
                 Paciente paciente= new Paciente(rs.getInt(1),rs.getInt(2),rs.getString(3),
-                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscar(rs.getInt(7)));
+                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscarXId(rs.getInt(7)));
                 listaPacientes.add(paciente);
             }
         }
@@ -161,7 +160,7 @@ public class PacienteDAOH2 implements IDAO<Paciente> {
 
             while(rs.next()){
                 paciente= new Paciente(rs.getInt(1),rs.getInt(2),rs.getString(3),
-                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscar(rs.getInt(7)));
+                        rs.getString(4),rs.getDate(5).toLocalDate(),rs.getString(6),domicilioDAOH2.buscarXId(rs.getInt(7)));
             }
         }
         catch (ClassNotFoundException e) {

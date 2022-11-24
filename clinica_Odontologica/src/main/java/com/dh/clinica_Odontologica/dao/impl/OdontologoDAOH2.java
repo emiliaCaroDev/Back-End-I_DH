@@ -51,7 +51,7 @@ public class OdontologoDAOH2 implements IDAO<Odontologo> {
     }
 
     @Override
-    public Odontologo buscar(Integer id) {
+    public Odontologo buscarXId(Integer id) {
         Odontologo odontologo= null;
         try {
             conn=obtenerConnection();

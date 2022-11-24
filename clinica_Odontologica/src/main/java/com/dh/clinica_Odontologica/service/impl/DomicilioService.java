@@ -1,7 +1,6 @@
 package com.dh.clinica_Odontologica.service.impl;
 
 import com.dh.clinica_Odontologica.dao.IDAO;
-import com.dh.clinica_Odontologica.dao.impl.DomicilioDAOH2;
 import com.dh.clinica_Odontologica.domain.Domicilio;
 import com.dh.clinica_Odontologica.service.IDomicilioService;
 
@@ -26,7 +25,7 @@ public class DomicilioService implements IDomicilioService {
 
     @Override
     public Domicilio buscarDomicilioXId(Integer id) {
-        return domicilioDao.buscar(id);
+        return domicilioDao.buscarXId(id);
     }
 
     @Override

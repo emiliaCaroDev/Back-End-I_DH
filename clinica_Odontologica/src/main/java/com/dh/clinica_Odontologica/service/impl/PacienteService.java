@@ -1,7 +1,6 @@
 package com.dh.clinica_Odontologica.service.impl;
 
 import com.dh.clinica_Odontologica.dao.IDAO;
-import com.dh.clinica_Odontologica.dao.impl.PacienteDAOH2;
 import com.dh.clinica_Odontologica.domain.Paciente;
 import com.dh.clinica_Odontologica.service.IPacienteService;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public Paciente buscarXId(Integer id) {
-        return pacienteDao.buscar(id);
+        return pacienteDao.buscarXId(id);
     }
 
     @Override

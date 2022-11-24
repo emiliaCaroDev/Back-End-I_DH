@@ -7,7 +7,7 @@ import java.util.List;
 public interface IDAO<T>{
 
     T guardar(T t);
-    T buscar(Integer id);
+    T buscarXId(Integer id);
     List<T> listarTodos();
     void eliminar(Integer id);
 

@@ -1,6 +1,7 @@
 package com.dh.clinica_Odontologica.controller;
 
 import com.dh.clinica_Odontologica.domain.Paciente;
+import com.dh.clinica_Odontologica.service.IPacienteService;
 import com.dh.clinica_Odontologica.service.impl.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/pacientes")
 public class PacienteController {
 
-    private PacienteService pacienteService;
+    private IPacienteService pacienteService;
     private Paciente paciente;
 
     //constructor
